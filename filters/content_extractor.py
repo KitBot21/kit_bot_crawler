@@ -17,7 +17,7 @@ class ContentExtractor:
     
     # 제거할 클래스/ID 패턴 (정규식)
     REMOVE_PATTERNS = [
-        r'menu', r'nav', r'sidebar', r'header', r'footer',
+        r'nav', r'sidebar', r'header', r'footer',
         r'breadcrumb', r'share', r'social', r'comment',
         r'ad', r'advertisement', r'banner', r'popup',
         r'login', r'search', r'pagination', r'paging',
@@ -26,6 +26,7 @@ class ContentExtractor:
         r'gnb', r'lnb', r'snb',  # 한국 웹사이트용
         r'top-menu', r'bottom-menu', r'side-menu',
         r'util-menu', r'quick-menu', r'floating',
+        r'footer-wrapper',
     ]
     
     # 본문일 가능성이 높은 클래스/ID 패턴
@@ -105,6 +106,17 @@ class ContentExtractor:
     def _find_main_content(self, soup: BeautifulSoup):
         """본문 영역 찾기 (휴리스틱)"""
         
+        # 0순위: 금오공대 CMS 전용 - jwxe_main_content가 여러 개 있을 때 처리
+        jwxe_candidates = soup.find_all(id='jwxe_main_content')
+        if jwxe_candidates:
+            def score(el):
+                # main 태그는 패널/레이아웃일 가능성이 높으니 약간 패널티
+                penalty = 1000 if el.name == 'main' else 0
+                return len(el.get_text(strip=True)) - penalty
+
+            best = max(jwxe_candidates, key=score)
+            return best
+
         # 1순위: <main> 태그
         main = soup.find('main')
         if main:
