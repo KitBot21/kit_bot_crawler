@@ -208,9 +208,11 @@ class ContentExtractor:
                 'href': a['href']
             })
         
+        main_area = self._find_main_content(soup)
+
         # 이미지 수집
         images = []
-        for img in soup.find_all('img', src=True):
+        for img in main_area.find_all('img', src=True):
             images.append({
                 'src': img['src'],
                 'alt': img.get('alt', '')
@@ -227,7 +229,7 @@ class ContentExtractor:
             'title': title,
             'paragraphs': paragraphs,
             'links': links[:10],  # 상위 10개만
-            'images': images[:5],  # 상위 5개만
+            'images': images[:10],  # 상위 5개만
             'char_count': len(clean_text),
             'word_count': len(clean_text.split()),
         }

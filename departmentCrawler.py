@@ -439,20 +439,79 @@ class departmentCrawler:
             # 첨부파일 추출 및 처리
             attachments = self._process_attachments(url, html)
 
+            # ✅ 1) page_type을 제일 먼저 결정
+            page_type = page_info.get("page_type", "static_intro")
+
+            # ✅ 2) board_name / title / display_title 정리
+            if page_type == "static_intro":
+                # 정적 소개/비전/교육과정 페이지:
+                # - board_name: 사이트 전체 경로(HTML <title>)
+                # - title/display_title: 사람이 보기 좋은 이름(page_info["name"])
+                board_name = content_data["title"] or page_info["name"]
+                title = page_info["name"]
+                display_title = title
+            else:
+                # 게시판 최신글 같은 케이스(board_notice 등)
+                # - board_name: 상위 게시판 이름
+                # - title: 게시글 제목(일단 HTML <title> 사용)
+                board_name = page_info.get("board_name") or page_info["name"]
+                title = content_data["title"] or page_info["name"]
+                display_title = title          
+
+            # 게시판 상세 페이지면 작성자/조회수/작성일 추출
+            author = None
+            view_count = None
+            created_at = None
+
+            if "board_notice" in page_type or "latest" in page_info["name"]:
+                try:
+                    soup = BeautifulSoup(html, "html.parser")
+
+                    # 작성자
+                    el_author = soup.find(text="작성자")
+                    if el_author and el_author.parent:
+                        author = el_author.parent.find_next().get_text(strip=True)
+
+                    # 조회수
+                    el_view = soup.find(text="조회")
+                    if el_view and el_view.parent:
+                        view_count = el_view.parent.find_next().get_text(strip=True)
+                        view_count = int(view_count) if view_count.isdigit() else None
+
+                    # 작성일
+                    el_date = soup.find(text="작성일")
+                    if el_date and el_date.parent:
+                        created_raw = el_date.parent.find_next().get_text(strip=True)
+                        # ISO 형식으로 변환
+                        created_at = created_raw.replace('.', '-').strip()
+                        try:
+                            created_at = datetime.strptime(created_at, "%Y-%m-%d").isoformat()
+                        except:
+                            created_at = None
+
+                except Exception as e:
+                    print("[WARN] 게시판 메타 파싱 실패:", e)
+
             # 메타데이터 준비
             metadata = {
                 "text_length": len(content_data['text']),
                 "word_count": content_data['word_count'],
-                "title": content_data['title'],
+                "title": title,
+                "board_name": board_name,
+                "display_title": display_title,
                 "paragraphs": content_data['paragraphs'],
                 "link_count": len(content_data['links']),
                 "attachments_count": len(attachments),
                 "attachments": attachments,
+                "images": content_data['images'],
                 "quality_check": reason,
                 "crawled_at": datetime.now().isoformat(),
                 "source_url": url,
-                "page_type": "static_intro",   # 학과/동아리/소개 페이지 태그
+                "page_type": page_type,   # 학과/동아리/소개 페이지 태그
                 "name": page_info["name"],
+                "author": author,
+                "view_count": view_count,
+                "created_at": created_at,
             }
 
             # 저장
@@ -657,6 +716,8 @@ class departmentCrawler:
             page_info = {
                 "url": latest_url,
                 "name": f"{name} (최신 게시글)",
+                "page_type": "board_notice",
+                "board_name": name,                
             }
             success = self.crawl_url(latest_url, page_info)
 

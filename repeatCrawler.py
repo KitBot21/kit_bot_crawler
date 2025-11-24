@@ -61,122 +61,122 @@ class SimpleTestCrawler:
         # 크롤링할 URL 목록
         self.target_urls = [
             # 학사일정
-            "https://www.kumoh.ac.kr/ko/schedule_reg.do",
+            # "https://www.kumoh.ac.kr/ko/schedule_reg.do",
             # 교내 식당
-            "https://www.kumoh.ac.kr/ko/restaurant01.do",
-            "https://www.kumoh.ac.kr/ko/restaurant02.do",
-            "https://www.kumoh.ac.kr/ko/restaurant04.do",
-            "https://www.kumoh.ac.kr/ko/restaurant05.do",
-            # 생활관 식당
-            "https://www.kumoh.ac.kr/dorm/restaurant_menu01.do",
-            "https://www.kumoh.ac.kr/dorm/restaurant_menu02.do",
-            "https://www.kumoh.ac.kr/dorm/restaurant_menu03.do",
+            # "https://www.kumoh.ac.kr/ko/restaurant01.do",
+            # "https://www.kumoh.ac.kr/ko/restaurant02.do",
+            # "https://www.kumoh.ac.kr/ko/restaurant04.do",
+            # "https://www.kumoh.ac.kr/ko/restaurant05.do",
+            # # 생활관 식당
+            # "https://www.kumoh.ac.kr/dorm/restaurant_menu01.do",
+            # "https://www.kumoh.ac.kr/dorm/restaurant_menu02.do",
+            # "https://www.kumoh.ac.kr/dorm/restaurant_menu03.do",
         ]
         
         # 게시판 URL (리스트 페이지 - 여러 게시글 크롤링)
         self.board_urls = [
-            {
-                "url": "https://bus.kumoh.ac.kr/bus/notice.do",
-                "name": "통학버스 공지",
-                "max_pages": 0,  # 0 = 전체 페이지 크롤링
-                "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
-            },
-            {
-                # 대부분의 게시글이 사진
-                "url": "https://www.kumoh.ac.kr/ko/sub01_02_03.do",
-                "name": "업무추진비 사용내역",
-                "max_pages": 0,  # 0 = 전체 페이지 크롤링
-                "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
-            },
-            {
-                "url": "https://www.kumoh.ac.kr/ko/sub01_05_01.do",
-                "name": "KIT Projects",
-                "max_pages": 0,  # 0 = 전체 페이지 크롤링
-                "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
-            },
-            {
-                # 첨부파일 존재하지만, 본문과 내용이 동일
-                "url": "https://www.kumoh.ac.kr/ko/sub01_05_04.do",
-                "name": "보도자료",
-                "max_pages": 0,  # 0 = 전체 페이지 크롤링
-                "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
-            },
-            {
-                # 다양하게 존재
-                "url": "https://www.kumoh.ac.kr/ko/sub06_01_01_01.do",
-                "name": "공지사항 학사안내",
-                "max_pages": 0,  # 0 = 전체 페이지 크롤링
-                "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
-            },
-            {
-                # 다양하게 존재
-                "url": "https://www.kumoh.ac.kr/ko/sub06_01_01_02.do",
-                "name": "공지사항 행사안내",
-                "max_pages": 0,  # 0 = 전체 페이지 크롤링
-                "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
-            },
-            {
-                "url": "https://www.kumoh.ac.kr/ko/sub06_01_01_03.do",
-                "name": "공지사항 일반소식",
-                "max_pages": 0,  # 0 = 전체 페이지 크롤링
-                "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
-            },
-            {
-                "url": "https://www.kumoh.ac.kr/ko/sub06_03_04_02.do",
-                "name": "정보공유 금오복덕방",
-                "max_pages": 0,  # 0 = 전체 페이지 크롤링
-                "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
-            },
-            {
-                "url": "https://www.kumoh.ac.kr/ko/sub06_03_04_04.do",
-                "name": "정보공유 아르바이트정보",
-                "max_pages": 0,  # 0 = 전체 페이지 크롤링
-                "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
-            },
+            # {
+            #     "url": "https://bus.kumoh.ac.kr/bus/notice.do",
+            #     "name": "통학버스 공지",
+            #     "max_pages": 0,  # 0 = 전체 페이지 크롤링
+            #     "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
+            # },
+            # {
+            #     # 대부분의 게시글이 사진
+            #     "url": "https://www.kumoh.ac.kr/ko/sub01_02_03.do",
+            #     "name": "업무추진비 사용내역",
+            #     "max_pages": 0,  # 0 = 전체 페이지 크롤링
+            #     "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
+            # },
+            # {
+            #     "url": "https://www.kumoh.ac.kr/ko/sub01_05_01.do",
+            #     "name": "KIT Projects",
+            #     "max_pages": 0,  # 0 = 전체 페이지 크롤링
+            #     "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
+            # },
+            # {
+            #     # 첨부파일 존재하지만, 본문과 내용이 동일
+            #     "url": "https://www.kumoh.ac.kr/ko/sub01_05_04.do",
+            #     "name": "보도자료",
+            #     "max_pages": 0,  # 0 = 전체 페이지 크롤링
+            #     "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
+            # },
+            # {
+            #     # 다양하게 존재
+            #     "url": "https://www.kumoh.ac.kr/ko/sub06_01_01_01.do",
+            #     "name": "공지사항 학사안내",
+            #     "max_pages": 0,  # 0 = 전체 페이지 크롤링
+            #     "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
+            # },
+            # {
+            #     # 다양하게 존재
+            #     "url": "https://www.kumoh.ac.kr/ko/sub06_01_01_02.do",
+            #     "name": "공지사항 행사안내",
+            #     "max_pages": 0,  # 0 = 전체 페이지 크롤링
+            #     "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
+            # },
+            # {
+            #     "url": "https://www.kumoh.ac.kr/ko/sub06_01_01_03.do",
+            #     "name": "공지사항 일반소식",
+            #     "max_pages": 0,  # 0 = 전체 페이지 크롤링
+            #     "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
+            # },
+            # {
+            #     "url": "https://www.kumoh.ac.kr/ko/sub06_03_04_02.do",
+            #     "name": "정보공유 금오복덕방",
+            #     "max_pages": 0,  # 0 = 전체 페이지 크롤링
+            #     "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
+            # },
+            # {
+            #     "url": "https://www.kumoh.ac.kr/ko/sub06_03_04_04.do",
+            #     "name": "정보공유 아르바이트정보",
+            #     "max_pages": 0,  # 0 = 전체 페이지 크롤링
+            #     "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
+            # },
             {
                 "url": "https://www.kumoh.ac.kr/ko/sub06_03_05_01.do",
                 "name": "문화예술공간 클래식감상",
                 "max_pages": 0,  # 0 = 전체 페이지 크롤링
                 "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
             },
-            {
-                # 사진만 존재
-                "url": "https://www.kumoh.ac.kr/ko/sub06_03_05_02.do",
-                "name": "문화예술공간 갤러리",
-                "max_pages": 0,  # 0 = 전체 페이지 크롤링
-                "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
-            },
-            {
-                # zip파일 존재
-                "url": "https://www.kumoh.ac.kr/ko/sub06_05_02.do",
-                "name": "총장임용후보자추천위원회 공지사항",
-                "max_pages": 0,  # 0 = 전체 페이지 크롤링
-                "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
-            },
-            {
-                "url": "https://www.kumoh.ac.kr/dorm/sub0401.do",
-                "name": "생활관 공지사항",
-                "max_pages": 0,  # 0 = 전체 페이지 크롤링
-                "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
-            },
-            {
-                "url": "https://www.kumoh.ac.kr/dorm/sub0407.do",
-                "name": "생활관 선발 공지사항",
-                "max_pages": 0,  # 0 = 전체 페이지 크롤링
-                "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
-            },
-            {
-                "url": "https://www.kumoh.ac.kr/dorm/sub0408.do",
-                "name": "생활관 입퇴사 공지사항",
-                "max_pages": 0,  # 0 = 전체 페이지 크롤링
-                "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
-            },
-            {
-                "url": "https://www.kumoh.ac.kr/dorm/sub0603.do",
-                "name": "신평동 신청방법",
-                "max_pages": 0,  # 0 = 전체 페이지 크롤링
-                "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
-            },
+            # {
+            #     # 사진만 존재
+            #     "url": "https://www.kumoh.ac.kr/ko/sub06_03_05_02.do",
+            #     "name": "문화예술공간 갤러리",
+            #     "max_pages": 0,  # 0 = 전체 페이지 크롤링
+            #     "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
+            # },
+            # {
+            #     # zip파일 존재
+            #     "url": "https://www.kumoh.ac.kr/ko/sub06_05_02.do",
+            #     "name": "총장임용후보자추천위원회 공지사항",
+            #     "max_pages": 0,  # 0 = 전체 페이지 크롤링
+            #     "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
+            # },
+            # {
+            #     "url": "https://www.kumoh.ac.kr/dorm/sub0401.do",
+            #     "name": "생활관 공지사항",
+            #     "max_pages": 0,  # 0 = 전체 페이지 크롤링
+            #     "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
+            # },
+            # {
+            #     "url": "https://www.kumoh.ac.kr/dorm/sub0407.do",
+            #     "name": "생활관 선발 공지사항",
+            #     "max_pages": 0,  # 0 = 전체 페이지 크롤링
+            #     "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
+            # },
+            # {
+            #     "url": "https://www.kumoh.ac.kr/dorm/sub0408.do",
+            #     "name": "생활관 입퇴사 공지사항",
+            #     "max_pages": 0,  # 0 = 전체 페이지 크롤링
+            #     "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
+            # },
+            # {
+            #     "url": "https://www.kumoh.ac.kr/dorm/sub0603.do",
+            #     "name": "신평동 신청방법",
+            #     "max_pages": 0,  # 0 = 전체 페이지 크롤링
+            #     "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
+            # },
         ]
         
         # 필터 및 저장소 초기화
@@ -255,18 +255,21 @@ class SimpleTestCrawler:
             except Exception as e:
                 logger.warning(f"기존 인덱스 로드 실패: {e}")
     
-    def crawl_url(self, url: str, skip_date_filter: bool = False) -> bool:
+    def crawl_url(self, url: str, skip_date_filter: bool = False, context: dict | None = None) -> bool:
         """
         단일 URL 크롤링
-        
+
         Args:
             url: 크롤링할 URL
             skip_date_filter: True면 날짜 필터 건너뛰기 (학사일정 등)
+            context: 게시판 이름, 소스 타입 등 부가 정보
+                    예) {"source_type": "board", "board_name": "통학버스 공지"}
         """
         self.stats["total"] += 1
-        
+        context = context or {}
+
         logger.info(f"크롤링 시작: {url}")
-        
+
         try:
             # 페이지 가져오기
             headers = {
@@ -274,86 +277,177 @@ class SimpleTestCrawler:
             }
             response = requests.get(url, headers=headers, timeout=10)
             response.raise_for_status()
-            
+
             html = response.text
-            
-            # 게시글 작성일 먼저 시도
+
+            # 게시글 작성일(정확한 '작성일') 먼저 시도
             post_date = self._extract_post_date(html)
 
-            # 날짜 필터 (학사일정은 스킵)
+            # 날짜 필터 (학사일정 등은 스킵)
             if not skip_date_filter:
-                # 날짜 추출 (게시글의 작성일 또는 수정일)
-                date_str = self._extract_date_from_html(html)
-                
+                # 날짜 추출 (게시글의 작성일이 있으면 그걸, 없으면 백업 추출)
+                date_str = post_date or self._extract_date_from_html(html)
+
                 # 날짜 필터 체크 (2021-01-01 이후만)
                 if date_str and not self.date_filter.is_recent(date_str):
                     logger.info(f"  ⏭️  날짜 필터: {date_str} (2021-01-01 이전)")
                     self.stats["filtered"] += 1
                     self.stats["filtered_date"] += 1
                     return False
-            
+
+            # 기본 값들
+            author = None
+            view_count = None
+            created_at = post_date  # 기본은 작성일(YYYY-MM-DD)
+            has_explicit_date = bool(created_at)
+
+            # 게시판 글이면 author / view / created_at 한 번 더 정확히 파싱
+            if context.get("source_type") == "board":
+                b_author, b_view, b_created = self._extract_board_meta(html)
+                if b_author:
+                    author = b_author
+                if b_view is not None:
+                    view_count = b_view
+                if b_created:
+                    created_at = b_created
+                    has_explicit_date = True
+
             # 품질 검사
             is_quality, reason = self.quality_filter.is_high_quality(html, url)
             if not is_quality:
                 logger.warning(f"품질 필터 실패: {reason}")
                 self.stats["filtered"] += 1
                 return False
-            
+
             # 본문 추출
             content_data = self.content_extractor.extract_with_metadata(html)
-            
+
             # 첨부파일 추출 및 처리
             attachments = self._process_attachments(url, html)
-            
-            # 메타데이터 준비
+
+            # 게시판이면 제목을 따로 한 번 더 시도
+            board_title = None
+            if context.get("source_type") == "board":
+                board_title = self._extract_board_title(html)
+
+            title_for_json = board_title or content_data['title'] or context.get("board_name")
+
+            # 메타데이터 준비 (JSONStorage가 이걸 보고 상단 필드 생성)
             metadata = {
                 "text_length": len(content_data['text']),
                 "word_count": content_data['word_count'],
-                "title": content_data['title'],
+                "title": title_for_json,
                 "paragraphs": content_data['paragraphs'],
                 "link_count": len(content_data['links']),
-                "attachments_count": len(attachments),  # 첨부파일 개수
-                "attachments": attachments,  # 첨부파일 정보
+                "attachments_count": len(attachments),
+                "attachments": attachments,
+                "images": content_data['images'],
                 "quality_check": reason,
                 "crawled_at": datetime.now().isoformat(),
-            }
-            
-            # ⭐ 원본 URL 저장
-            metadata["source_url"] = url
-            
-            # 작성일 메타데이터에 추가 (있을 때만)
-            if post_date:
-                metadata["post_date"] = post_date  # YYYY-MM-DD 형식
 
-            # 저장
-            filepath = self.storage.save_page(url, html, metadata)
-            
+                # 추가된 부분들 ↓
+                "source_url": url,
+                "source_type": context.get("source_type", "page"),  # "page" or "board"
+                "board_name": content_data['title'],
+                "author": author,
+                "view_count": view_count,
+                "created_at": created_at,
+                "has_explicit_date": has_explicit_date,
+            }
+
+            # 저장 (추출된 텍스트와 제목을 넘겨서 main_text / title 세팅)
+            filepath = self.storage.save_page(
+                url=url,
+                html=html,
+                metadata=metadata,
+                extracted_text=content_data['text'],
+                title=title_for_json,
+            )
+
             self.saved_pages.append({
                 "url": url,
                 "file": filepath,
-                "title": content_data['title'],
+                "title": title_for_json,
                 "text_length": len(content_data['text']),
             })
-            
+
             self.stats["success"] += 1
-            
+
             logger.info(f"✅ 저장 완료: {Path(filepath).name}")
             logger.info(f"   제목: {content_data['title'][:50]}...")
             logger.info(f"   본문 길이: {len(content_data['text'])} 문자")
             logger.info(f"   문단 수: {content_data['paragraphs']}")
-            
+
             return True
-            
+
         except requests.RequestException as e:
             logger.error(f"❌ 네트워크 에러: {e}")
             self.stats["failed"] += 1
             return False
-        
+
         except Exception as e:
             logger.error(f"❌ 처리 에러: {e}")
             self.stats["failed"] += 1
             return False
-    
+        
+    def _extract_board_title(self, html: str) -> str | None:
+        from bs4 import BeautifulSoup
+
+        soup = BeautifulSoup(html, 'html.parser')
+        head = soup.find('div', class_='title-area')
+        if not head:
+            return None
+
+        # 금오 게시판은 보통 h4, strong 안에 제목이 들어있음
+        for tag in ['h4', 'h3', 'strong']:
+            el = head.find(tag)
+            if el:
+                text = el.get_text(strip=True)
+                if text:
+                    return text
+
+        return None    
+
+    def _extract_board_meta(self, html: str):
+        """
+        금오 게시판 상세 페이지의 상단 정보(작성자, 조회수, 작성일) 파싱
+        반환: (author, view_count, created_at)  created_at은 YYYY-MM-DD 또는 None
+        """
+        from bs4 import BeautifulSoup
+        import re
+
+        soup = BeautifulSoup(html, 'html.parser')
+        info_div = soup.find('div', class_='board-view-information')
+        author = None
+        view_count = None
+        created_at = None
+
+        if not info_div:
+            return author, view_count, created_at
+
+        for dl in info_div.find_all('dl'):
+            dt = dl.find('dt')
+            dd = dl.find('dd')
+            if not dt or not dd:
+                continue
+
+            key = dt.get_text(strip=True)
+            val = dd.get_text(strip=True)
+
+            if '작성자' in key:
+                author = val
+            elif '조회' in key:
+                digits = ''.join(ch for ch in val if ch.isdigit())
+                if digits:
+                    view_count = int(digits)
+            elif '작성일' in key:
+                m = re.search(r'(\d{4})[.-](\d{2})[.-](\d{2})', val)
+                if m:
+                    y, mth, d = m.groups()
+                    created_at = f"{y}-{mth}-{d}"
+
+        return author, view_count, created_at
+
     def _process_attachments(self, page_url: str, html: str) -> list:
         """
         HTML에서 첨부파일 링크를 추출하고 MinIO에 업로드
@@ -660,7 +754,18 @@ class SimpleTestCrawler:
                         continue
                     
                     logger.info(f"\n   [{total_articles + i}] {article_url[:80]}...")
-                    success = self.crawl_url(article_url, skip_date_filter=skip_date_filter)
+
+                    # ✅ 게시판 컨텍스트 전달
+                    context = {
+                        "source_type": "board",
+                        "board_name": board_name,   # 함수 인자로 받은 board_name
+                    }
+
+                    success = self.crawl_url(
+                        article_url,
+                        skip_date_filter=skip_date_filter,
+                        context=context,
+                    )
                     
                     # 크롤링 성공 시 existing_urls에 추가
                     if success:
