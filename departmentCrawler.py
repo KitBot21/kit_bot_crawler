@@ -35,6 +35,9 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+exclude_patterns = [
+    "/cms/fileDownload.do",
+]
 
 class departmentCrawler:
     """학과/동아리/정적 소개 페이지 전용 크롤러"""
@@ -567,6 +570,9 @@ class departmentCrawler:
                         '.pdf', '.hwp', '.docx', '.xlsx', '.pptx', '.zip'
                     ])
                 )
+
+                if any(pattern in href for pattern in exclude_patterns):
+                    is_download = False
 
                 if not is_download:
                     continue
