@@ -53,7 +53,7 @@ def crawl_static_from_sitemap(
 
     try:
         headers = {
-            "User-Agent": "KITBot/2.0 (CSEcapstone, sitemap-crawler)"
+            'User-Agent': 'KITBot/2.0 (CSEcapstone, contact: cdh5113@naver.com)'
         }
         resp = requests.get(sitemap_url, headers=headers, timeout=15)
         resp.raise_for_status()
