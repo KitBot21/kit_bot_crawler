@@ -664,6 +664,104 @@ class SimpleTestCrawler:
                 
                 attachments.append(attachment_info)
         
+            # 2) 이미지(img src) 첨부 처리
+            image_exts = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp', '.svg']
+
+            for img in soup.find_all('img', src=True):
+                src = img['src']
+                alt_text = img.get('alt', '').strip()
+
+                # 확장자 필터 (쿼리스트링 제거 후 판별)
+                src_no_query = src.split('?', 1)[0].lower()
+                if not any(src_no_query.endswith(ext) for ext in image_exts):
+                    continue
+
+                # 필요하면 exclude_patterns 재사용 (대부분은 안 걸리겠지만 통일감 차원에서)
+                if any(pattern in src for pattern in exclude_patterns):
+                    continue
+
+                # 절대 URL 변환
+                abs_url = urllib.parse.urljoin(page_url, src)
+
+                self.stats["attachments_found"] += 1
+
+                attachment_info = {
+                    "page_url": page_url,
+                    "link_text": alt_text or "(image)",
+                    "download_url": abs_url,
+                    "detected_at": datetime.now().isoformat(),
+                    "type": "image",   # ← 이미지 타입 표시
+                }
+
+                if self.enable_minio and self.minio:
+                    try:
+                        headers = {
+                            'User-Agent': 'KITBot/2.0 (CSEcapstone, contact: cdh5113@naver.com)',
+                            'Referer': page_url,
+                        }
+                        resp = requests.get(abs_url, headers=headers, timeout=30)
+                        resp.raise_for_status()
+
+                        file_data = resp.content
+                        content_type = resp.headers.get('Content-Type', 'image/*')
+
+                        # 파일명 추출 (URL 기준)
+                        filename = abs_url.split('/')[-1].split('?')[0]
+                        if not filename:
+                            filename = f"image_{hashlib.md5(abs_url.encode()).hexdigest()[:8]}.bin"
+
+                        # URL 디코딩
+                        try:
+                            filename = urllib.parse.unquote(filename)
+                        except Exception:
+                            pass
+
+                        clean_filename = filename.replace('/', '_').replace('\\', '_')
+                        file_hash = hashlib.sha256(file_data).hexdigest()[:16]
+
+                        object_name = f"images/{clean_filename}"
+                        # 이미 같은 object_name이 있으면 해시 일부를 붙여서 충돌 방지
+                        if self.minio.file_exists(object_name):
+                            if '.' in clean_filename:
+                                name_part, ext = clean_filename.rsplit('.', 1)
+                                object_name = f"images/{name_part}_{file_hash[:8]}.{ext}"
+                            else:
+                                object_name = f"images/{clean_filename}_{file_hash[:8]}"
+
+                        success, result = self.minio.upload_file(
+                            file_data=file_data,
+                            object_name=object_name,
+                            content_type=content_type,
+                            original_filename=filename,
+                            metadata={
+                                "source_url": abs_url,
+                                "page_url": page_url,
+                                "alt_text": alt_text,
+                            }
+                        )
+
+                        if success:
+                            attachment_info["minio_url"] = result
+                            attachment_info["minio_object"] = object_name
+                            attachment_info["file_size"] = len(file_data)
+                            attachment_info["sha256"] = file_hash
+                            attachment_info["filename"] = clean_filename
+                            attachment_info["status"] = "uploaded"
+                            self.stats["attachments_uploaded"] += 1
+                            logger.info(f"   🖼 이미지 업로드: {clean_filename} ({len(file_data):,} bytes)")
+                        else:
+                            attachment_info["status"] = "upload_failed"
+                            attachment_info["error"] = result
+                            logger.warning(f"   ⚠️  이미지 업로드 실패: {filename}")
+                    except Exception as e:
+                        attachment_info["status"] = "download_failed"
+                        attachment_info["error"] = str(e)
+                        logger.warning(f"   ⚠️  이미지 다운로드 실패: {alt_text or src} - {e}")
+                else:
+                    attachment_info["status"] = "metadata_only"
+
+                attachments.append(attachment_info)
+
         except Exception as e:
             logger.error(f"❌ 첨부파일 처리 에러: {e}")
         
