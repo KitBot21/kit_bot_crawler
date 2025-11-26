@@ -1195,7 +1195,7 @@ class SimpleTestCrawler:
                 menu_text = self._extract_menu_table(soup)
                 if menu_text:
                     # 메뉴 테이블이 있으면 본문에 추가
-                    content_data['text'] = menu_text + "\n\n" + content_data['text']
+                    content_data['text'] = menu_text
                 
                 # URL에서 식당 이름 추출
                 restaurant_name = "식당"
@@ -1269,44 +1269,105 @@ class SimpleTestCrawler:
     
     def _extract_menu_table(self, soup: BeautifulSoup) -> str:
         """
-        식당 메뉴 테이블을 텍스트로 변환
-        
-        Args:
-            soup: BeautifulSoup 객체
-            
-        Returns:
-            테이블을 텍스트로 변환한 문자열
+        <table>의 가로(열=요일) / 세로(행=식사타입) 구조만 이용해서
+        요일별로 조식/중식/석식 메뉴를 정리해서 텍스트로 변환.
+
+        예시 출력:
+        [월(11.24)]
+          중식: 메뉴1 / 메뉴2 / ...
+          석식: 메뉴1 / 메뉴2 / ...
+
+        [화(11.25)]
+          중식: ...
+          석식: ...
         """
-        tables = soup.find_all('table')
-        if not tables:
+
+        # 1) 메뉴 테이블 찾기 (caption에 '식당 메뉴 표' 들어간 것 우선)
+        table = None
+        for t in soup.find_all("table"):
+            cap = t.find("caption")
+            if cap and "식당 메뉴 표" in cap.get_text(strip=True):
+                table = t
+                break
+        if table is None:
+            table = soup.find("table")
+        if table is None:
             return ""
-        
-        menu_lines = []
-        
-        for table in tables:
-            rows = table.find_all('tr')
-            
-            for row in rows:
-                # th와 td 모두 추출
-                cells = row.find_all(['th', 'td'])
-                if not cells:
+
+        # 2) 헤더에서 요일 라벨 추출 (열 개수 = 요일 개수)
+        thead = table.find("thead")
+        if not thead:
+            return ""
+
+        ths = thead.find_all("th")
+        day_labels = [th.get_text(" ", strip=True) for th in ths if th.get_text(strip=True)]
+        num_days = len(day_labels)
+        if num_days == 0:
+            return ""
+
+        # per_day[day_index] = { "중식": [..메뉴..], "석식": [..메뉴..], ... }
+        per_day: list[dict[str, list[str]]] = [dict() for _ in range(num_days)]
+        # 전체 식사타입 출력 순서 유지용 (조식 → 중식 → 석식 순 등)
+        meal_order: list[str] = []
+
+        # 3) tbody의 각 행(tr)을 돌면서, 셀(td)을 요일 인덱스에 매핑
+        tbody = table.find("tbody")
+        if not tbody:
+            return ""
+
+        for row in tbody.find_all("tr"):
+            tds = row.find_all("td")
+            if not tds:
+                continue
+
+            # 각 td = 해당 요일의 한 끼(중식/석식 등)
+            for col_idx, td in enumerate(tds):
+                if col_idx >= num_days:
+                    break
+
+                p = td.find("p")
+                if not p:
                     continue
-                
-                # 셀 내용 추출
-                cell_texts = []
-                for cell in cells:
-                    text = cell.get_text(strip=True)
-                    if text:
-                        cell_texts.append(text)
-                
-                if cell_texts:
-                    # 첫 번째 행은 헤더로 처리
-                    if row.find('th'):
-                        menu_lines.append("[ " + " | ".join(cell_texts) + " ]")
-                    else:
-                        menu_lines.append(" | ".join(cell_texts))
-        
-        return "\n".join(menu_lines) if menu_lines else ""
+
+                meal_name = p.get_text(strip=True)  # 예: "중식", "석식"
+                if not meal_name:
+                    continue
+
+                # li 항목들 = 실제 메뉴들
+                items = [li.get_text(strip=True) for li in td.find_all("li")]
+                # li가 없고 그냥 텍스트만 있는 경우 대응하고 싶으면 여기에 추가 처리 가능
+                if not items:
+                    # td 안의 전체 텍스트에서 p 텍스트는 빼고 나머지를 볼 수도 있음
+                    # 여기서는 li 없으면 스킵
+                    continue
+
+                # 식사타입 등장 순서 기록 (조식→중식→석식 순서 유지)
+                if meal_name not in meal_order:
+                    meal_order.append(meal_name)
+
+                day_meals = per_day[col_idx]
+                if meal_name not in day_meals:
+                    day_meals[meal_name] = []
+                day_meals[meal_name].extend(items)
+
+        # 4) 최종 텍스트 조립: 요일별 블록
+        lines: list[str] = []
+        for day_idx, day_label in enumerate(day_labels):
+            lines.append(f"[{day_label}]")
+
+            day_meals = per_day[day_idx]
+
+            for meal_name in meal_order:
+                if meal_name in day_meals and day_meals[meal_name]:
+                    menu_str = " / ".join(day_meals[meal_name])
+                    lines.append(f"  {meal_name}: {menu_str}")
+
+            lines.append("")  # 요일 사이 공백
+
+        return "\n".join(lines).strip()
+
+
+
     
     def run(self):
         """크롤링 실행"""
