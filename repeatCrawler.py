@@ -35,7 +35,18 @@ logger = logging.getLogger(__name__)
 exclude_patterns = [
     "/cms/fileDownload.do",
 ]
-
+# 페이지 크롬(로고, 메뉴, SNS, 버튼 등) 이미지 필터
+ICON_IMAGE_KEYWORDS = [
+    "/_res/ko/img/icon/",
+    "/_res/ko/img/common/",
+    "logo",
+    "btn_",
+    "btn-",
+    "bg_subvisual",
+    "wa-mark",
+    "bubble_tail",
+    "btn_top_go",
+]
 class SimpleTestCrawler:
     """간단한 테스트 크롤러"""
     
@@ -64,188 +75,188 @@ class SimpleTestCrawler:
         # 크롤링할 URL 목록
         self.target_urls = [
             # 학사일정
-            "https://www.kumoh.ac.kr/ko/schedule_reg.do",
-            # 교내 식당
-            "https://www.kumoh.ac.kr/ko/restaurant01.do",
-            "https://www.kumoh.ac.kr/ko/restaurant02.do",
-            "https://www.kumoh.ac.kr/ko/restaurant04.do",
-            "https://www.kumoh.ac.kr/ko/restaurant05.do",
-            # 생활관 식당
-            "https://www.kumoh.ac.kr/dorm/restaurant_menu01.do",
-            "https://www.kumoh.ac.kr/dorm/restaurant_menu02.do",
-            "https://www.kumoh.ac.kr/dorm/restaurant_menu03.do",
+            # "https://www.kumoh.ac.kr/ko/schedule_reg.do",
+            # # 교내 식당
+            # "https://www.kumoh.ac.kr/ko/restaurant01.do",
+            # "https://www.kumoh.ac.kr/ko/restaurant02.do",
+            # "https://www.kumoh.ac.kr/ko/restaurant04.do",
+            # "https://www.kumoh.ac.kr/ko/restaurant05.do",
+            # # 생활관 식당
+            # "https://www.kumoh.ac.kr/dorm/restaurant_menu01.do",
+            # "https://www.kumoh.ac.kr/dorm/restaurant_menu02.do",
+            # "https://www.kumoh.ac.kr/dorm/restaurant_menu03.do",
         ]
         
         # 게시판 URL (리스트 페이지 - 여러 게시글 크롤링)
         self.board_urls = [
-            {
-                "url": "https://bus.kumoh.ac.kr/bus/notice.do",
-                "name": "통학버스 공지",
-                "max_pages": 0,  # 0 = 전체 페이지 크롤링
-                "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
-            },
-            {
-                # 대부분의 게시글이 사진
-                "url": "https://www.kumoh.ac.kr/ko/sub01_02_03.do",
-                "name": "업무추진비 사용내역",
-                "max_pages": 0,  # 0 = 전체 페이지 크롤링
-                "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
-            },
-            {
-                "url": "https://www.kumoh.ac.kr/ko/sub01_05_01.do",
-                "name": "KIT Projects",
-                "max_pages": 0,  # 0 = 전체 페이지 크롤링
-                "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
-            },
-            {
-                # 첨부파일 존재하지만, 본문과 내용이 동일
-                "url": "https://www.kumoh.ac.kr/ko/sub01_05_04.do",
-                "name": "보도자료",
-                "max_pages": 0,  # 0 = 전체 페이지 크롤링
-                "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
-            },
-            {
-                # 다양하게 존재
-                "url": "https://www.kumoh.ac.kr/ko/sub06_01_01_01.do",
-                "name": "공지사항 학사안내",
-                "max_pages": 0,  # 0 = 전체 페이지 크롤링
-                "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
-            },
-            {
-                # 다양하게 존재
-                "url": "https://www.kumoh.ac.kr/ko/sub06_01_01_02.do",
-                "name": "공지사항 행사안내",
-                "max_pages": 0,  # 0 = 전체 페이지 크롤링
-                "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
-            },
-            {
-                "url": "https://www.kumoh.ac.kr/ko/sub06_01_01_03.do",
-                "name": "공지사항 일반소식",
-                "max_pages": 0,  # 0 = 전체 페이지 크롤링
-                "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
-            },
-            {
-                "url": "https://www.kumoh.ac.kr/ko/sub06_03_04_02.do",
-                "name": "정보공유 금오복덕방",
-                "max_pages": 0,  # 0 = 전체 페이지 크롤링
-                "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
-            },
-            {
-                "url": "https://www.kumoh.ac.kr/ko/sub06_03_04_04.do",
-                "name": "정보공유 아르바이트정보",
-                "max_pages": 0,  # 0 = 전체 페이지 크롤링
-                "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
-            },
+            # {
+            #     "url": "https://bus.kumoh.ac.kr/bus/notice.do",
+            #     "name": "통학버스 공지",
+            #     "max_pages": 0,  # 0 = 전체 페이지 크롤링
+            #     "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
+            # },
+            # {
+            #     # 대부분의 게시글이 사진
+            #     "url": "https://www.kumoh.ac.kr/ko/sub01_02_03.do",
+            #     "name": "업무추진비 사용내역",
+            #     "max_pages": 0,  # 0 = 전체 페이지 크롤링
+            #     "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
+            # },
+            # {
+            #     "url": "https://www.kumoh.ac.kr/ko/sub01_05_01.do",
+            #     "name": "KIT Projects",
+            #     "max_pages": 0,  # 0 = 전체 페이지 크롤링
+            #     "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
+            # },
+            # {
+            #     # 첨부파일 존재하지만, 본문과 내용이 동일
+            #     "url": "https://www.kumoh.ac.kr/ko/sub01_05_04.do",
+            #     "name": "보도자료",
+            #     "max_pages": 0,  # 0 = 전체 페이지 크롤링
+            #     "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
+            # },
+            # {
+            #     # 다양하게 존재
+            #     "url": "https://www.kumoh.ac.kr/ko/sub06_01_01_01.do",
+            #     "name": "공지사항 학사안내",
+            #     "max_pages": 0,  # 0 = 전체 페이지 크롤링
+            #     "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
+            # },
+            # {
+            #     # 다양하게 존재
+            #     "url": "https://www.kumoh.ac.kr/ko/sub06_01_01_02.do",
+            #     "name": "공지사항 행사안내",
+            #     "max_pages": 0,  # 0 = 전체 페이지 크롤링
+            #     "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
+            # },
+            # {
+            #     "url": "https://www.kumoh.ac.kr/ko/sub06_01_01_03.do",
+            #     "name": "공지사항 일반소식",
+            #     "max_pages": 0,  # 0 = 전체 페이지 크롤링
+            #     "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
+            # },
+            # {
+            #     "url": "https://www.kumoh.ac.kr/ko/sub06_03_04_02.do",
+            #     "name": "정보공유 금오복덕방",
+            #     "max_pages": 0,  # 0 = 전체 페이지 크롤링
+            #     "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
+            # },
+            # {
+            #     "url": "https://www.kumoh.ac.kr/ko/sub06_03_04_04.do",
+            #     "name": "정보공유 아르바이트정보",
+            #     "max_pages": 0,  # 0 = 전체 페이지 크롤링
+            #     "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
+            # },
             {
                 "url": "https://www.kumoh.ac.kr/ko/sub06_03_05_01.do",
                 "name": "문화예술공간 클래식감상",
                 "max_pages": 0,  # 0 = 전체 페이지 크롤링
                 "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
             },
-            {
-                # 사진만 존재
-                "url": "https://www.kumoh.ac.kr/ko/sub06_03_05_02.do",
-                "name": "문화예술공간 갤러리",
-                "max_pages": 0,  # 0 = 전체 페이지 크롤링
-                "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
-            },
-            {
-                # zip파일 존재
-                "url": "https://www.kumoh.ac.kr/ko/sub06_05_02.do",
-                "name": "총장임용후보자추천위원회 공지사항",
-                "max_pages": 0,  # 0 = 전체 페이지 크롤링
-                "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
-            },
-            {
-                "url": "https://www.kumoh.ac.kr/dorm/sub0401.do",
-                "name": "생활관 공지사항",
-                "max_pages": 0,  # 0 = 전체 페이지 크롤링
-                "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
-            },
-            {
-                "url": "https://www.kumoh.ac.kr/dorm/sub0407.do",
-                "name": "생활관 선발 공지사항",
-                "max_pages": 0,  # 0 = 전체 페이지 크롤링
-                "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
-            },
-            {
-                "url": "https://www.kumoh.ac.kr/dorm/sub0408.do",
-                "name": "생활관 입퇴사 공지사항",
-                "max_pages": 0,  # 0 = 전체 페이지 크롤링
-                "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
-            },
-            {
-                "url": "https://www.kumoh.ac.kr/dorm/sub0603.do",
-                "name": "신평동 신청방법",
-                "max_pages": 0,  # 0 = 전체 페이지 크롤링
-                "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
-            },
-                        {
-                "url": "https://www.kumoh.ac.kr/ko/sub01_01_07_02.do",
-                "name": "대학소개 현황 재정현황",
-                "max_pages": 0,
-                "skip_date_filter": False,
-            },
-            {
-                "url": "https://www.kumoh.ac.kr/ko/sub01_01_07_03.do",
-                "name": "대학소개 현황 재정위원회 회의록",
-                "max_pages": 0,
-                "skip_date_filter": False,
-            },
-            {
-                "url": "https://www.kumoh.ac.kr/ko/sub01_01_07_04.do",
-                "name": "대학소개 현황 대학평의원회 회의록",
-                "max_pages": 0,
-                "skip_date_filter": False,
-            },
-            {
-                "url": "https://www.kumoh.ac.kr/ko/sub01_01_07_05.do",
-                "name": "대학소개 현황 등록금심의위원 회의록",
-                "max_pages": 0,
-                "skip_date_filter": False,
-            },
-            {
-                "url": "https://www.kumoh.ac.kr/ko/sub01_01_08.do",
-                "name": "대학소개 UI",
-                "max_pages": 0,
-                "skip_date_filter": False,
-            },
-            {
-                "url": "https://www.kumoh.ac.kr/ko/sub01_02_03.do",
-                "name": "대학소개 열린총장실 업무추진비",
-                "max_pages": 0,
-                "skip_date_filter": False,
-            },
-            {
-                "url": "https://www.kumoh.ac.kr/ko/sub01_04.do",
-                "name": "대학소개 규정집",
-                "max_pages": 0,
-                "skip_date_filter": False,
-            },
-            {
-                "url": "https://www.kumoh.ac.kr/ko/sub01_05_02.do",
-                "name": "대학소개 홍보 KIT People",
-                "max_pages": 0,
-                "skip_date_filter": False,
-            },
-            {
-                "url": "https://www.kumoh.ac.kr/ko/sub01_05_03.do",
-                "name": "대학소개 홍보 KIT News",
-                "max_pages": 0,
-                "skip_date_filter": False,
-            },
-            {
-                "url": "https://www.kumoh.ac.kr/ko/sub07_01_02.do",
-                "name": "금오신문고 청탁금지법자료실",
-                "max_pages": 0,
-                "skip_date_filter": False,
-            },
-            {
-                "url": "https://www.kumoh.ac.kr/ko/sub07_01_03.do",
-                "name": "금오신문고 행동강령자료실",
-                "max_pages": 0,
-                "skip_date_filter": False,
-            },
+            # {
+            #     # 사진만 존재
+            #     "url": "https://www.kumoh.ac.kr/ko/sub06_03_05_02.do",
+            #     "name": "문화예술공간 갤러리",
+            #     "max_pages": 0,  # 0 = 전체 페이지 크롤링
+            #     "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
+            # },
+            # {
+            #     # zip파일 존재
+            #     "url": "https://www.kumoh.ac.kr/ko/sub06_05_02.do",
+            #     "name": "총장임용후보자추천위원회 공지사항",
+            #     "max_pages": 0,  # 0 = 전체 페이지 크롤링
+            #     "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
+            # },
+            # {
+            #     "url": "https://www.kumoh.ac.kr/dorm/sub0401.do",
+            #     "name": "생활관 공지사항",
+            #     "max_pages": 0,  # 0 = 전체 페이지 크롤링
+            #     "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
+            # },
+            # {
+            #     "url": "https://www.kumoh.ac.kr/dorm/sub0407.do",
+            #     "name": "생활관 선발 공지사항",
+            #     "max_pages": 0,  # 0 = 전체 페이지 크롤링
+            #     "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
+            # },
+            # {
+            #     "url": "https://www.kumoh.ac.kr/dorm/sub0408.do",
+            #     "name": "생활관 입퇴사 공지사항",
+            #     "max_pages": 0,  # 0 = 전체 페이지 크롤링
+            #     "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
+            # },
+            # {
+            #     "url": "https://www.kumoh.ac.kr/dorm/sub0603.do",
+            #     "name": "신평동 신청방법",
+            #     "max_pages": 0,  # 0 = 전체 페이지 크롤링
+            #     "skip_date_filter": False,  # 날짜 필터 적용 (2021-01-01 이후만)
+            # },
+            #             {
+            #     "url": "https://www.kumoh.ac.kr/ko/sub01_01_07_02.do",
+            #     "name": "대학소개 현황 재정현황",
+            #     "max_pages": 0,
+            #     "skip_date_filter": False,
+            # },
+            # {
+            #     "url": "https://www.kumoh.ac.kr/ko/sub01_01_07_03.do",
+            #     "name": "대학소개 현황 재정위원회 회의록",
+            #     "max_pages": 0,
+            #     "skip_date_filter": False,
+            # },
+            # {
+            #     "url": "https://www.kumoh.ac.kr/ko/sub01_01_07_04.do",
+            #     "name": "대학소개 현황 대학평의원회 회의록",
+            #     "max_pages": 0,
+            #     "skip_date_filter": False,
+            # },
+            # {
+            #     "url": "https://www.kumoh.ac.kr/ko/sub01_01_07_05.do",
+            #     "name": "대학소개 현황 등록금심의위원 회의록",
+            #     "max_pages": 0,
+            #     "skip_date_filter": False,
+            # },
+            # {
+            #     "url": "https://www.kumoh.ac.kr/ko/sub01_01_08.do",
+            #     "name": "대학소개 UI",
+            #     "max_pages": 0,
+            #     "skip_date_filter": False,
+            # },
+            # {
+            #     "url": "https://www.kumoh.ac.kr/ko/sub01_02_03.do",
+            #     "name": "대학소개 열린총장실 업무추진비",
+            #     "max_pages": 0,
+            #     "skip_date_filter": False,
+            # },
+            # {
+            #     "url": "https://www.kumoh.ac.kr/ko/sub01_04.do",
+            #     "name": "대학소개 규정집",
+            #     "max_pages": 0,
+            #     "skip_date_filter": False,
+            # },
+            # {
+            #     "url": "https://www.kumoh.ac.kr/ko/sub01_05_02.do",
+            #     "name": "대학소개 홍보 KIT People",
+            #     "max_pages": 0,
+            #     "skip_date_filter": False,
+            # },
+            # {
+            #     "url": "https://www.kumoh.ac.kr/ko/sub01_05_03.do",
+            #     "name": "대학소개 홍보 KIT News",
+            #     "max_pages": 0,
+            #     "skip_date_filter": False,
+            # },
+            # {
+            #     "url": "https://www.kumoh.ac.kr/ko/sub07_01_02.do",
+            #     "name": "금오신문고 청탁금지법자료실",
+            #     "max_pages": 0,
+            #     "skip_date_filter": False,
+            # },
+            # {
+            #     "url": "https://www.kumoh.ac.kr/ko/sub07_01_03.do",
+            #     "name": "금오신문고 행동강령자료실",
+            #     "max_pages": 0,
+            #     "skip_date_filter": False,
+            # },
         ]
         
         # 필터 및 저장소 초기화
@@ -671,13 +682,16 @@ class SimpleTestCrawler:
                 src = img['src']
                 alt_text = img.get('alt', '').strip()
 
-                # 확장자 필터 (쿼리스트링 제거 후 판별)
-                src_no_query = src.split('?', 1)[0].lower()
-                if not any(src_no_query.endswith(ext) for ext in image_exts):
+                # 0) 사이트 공통 아이콘/로고/버튼/배경 이미지는 스킵
+                if any(key in src for key in ICON_IMAGE_KEYWORDS):
                     continue
 
-                # 필요하면 exclude_patterns 재사용 (대부분은 안 걸리겠지만 통일감 차원에서)
-                if any(pattern in src for pattern in exclude_patterns):
+                # 1) 확장자/패턴 체크
+                src_no_query = src.split('?', 1)[0].lower()
+                is_image_by_ext = any(src_no_query.endswith(ext) for ext in image_exts)
+                is_editor_image = 'editorimage.do' in src_no_query  # 본문 이미지
+
+                if not (is_image_by_ext or is_editor_image):
                     continue
 
                 # 절대 URL 변환
