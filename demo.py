@@ -4,7 +4,7 @@ demoCrawler.py
 
 발표/시연용 데모 크롤러
 - 미리 선정한 "게시글 상세 URL"만 크롤링
-- 제목을 추출해서 안드로이드 서버로 전송(process_page)만 수행
+- 제목을 추출해서 안드로이드 서버로 전송(check_and_notify)만 수행
 """
 
 import sys
@@ -21,7 +21,7 @@ load_dotenv(dotenv_path=Path(__file__).parent.parent / ".env")
 # crawler 모듈 임포트를 위한 경로 추가 (sendToServer.py 등)
 sys.path.insert(0, str(Path(__file__).parent))
 
-from sendToServer import process_page
+from sendToServer import check_and_notify
 
 # 로깅 설정
 logging.basicConfig(
@@ -106,10 +106,10 @@ class DemoCrawler:
 
             # 실제 시연용 전송
             if self.dry_run:
-                logger.info("   [DRY-RUN] process_page 호출 생략 (시연 테스트 모드)")
+                logger.info("   [DRY-RUN] check_and_notify 호출 생략 (시연 테스트 모드)")
             else:
                 try:
-                    process_page(
+                    check_and_notify(
                         url=url,
                         title=title,
                     )

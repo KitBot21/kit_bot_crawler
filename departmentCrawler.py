@@ -27,7 +27,7 @@ from filters.content_extractor import ContentExtractor
 from filters.quality_filter import QualityFilter
 from storage.json_storage import JSONStorage
 from storage.minio_storage import MinIOStorage
-from sendToServer import process_page
+from sendToServer import check_and_notify
 
 # 로깅 설정
 logging.basicConfig(
@@ -551,7 +551,7 @@ class departmentCrawler:
 
             # ✅ 안드로이드 서버로 메타데이터 전송 (키워드 필터 적용)
             try:
-                process_page(
+                check_and_notify(
                     url=url,
                     title=metadata["title"],
                 )

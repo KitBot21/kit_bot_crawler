@@ -12,7 +12,7 @@ class MetaData(BaseModel):
     title: str
 
 
-@app.post("/crawler/keyword")
+@app.post("/api/crawler/keyword")
 async def receive_metadata(data: MetaData):
     # TODO: 여기서 DB 저장 / 로그 / 기타 처리 수행
     print(f"받은 URL: {data.url}")
