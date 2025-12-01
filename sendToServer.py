@@ -5,7 +5,7 @@ import requests
 ANDROID_SERVER = "http://127.0.0.1:8000/crawler/keyword"
 
 # 키워드 리스트 (예: 너가 정한 규칙)
-KEYWORDS = ["BOD"]
+KEYWORDS = ["계절"]
 
 
 def send_metadata(url: str, keyword: str, title: str):
