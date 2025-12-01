@@ -76,41 +76,41 @@ class departmentCrawler:
 
         # ✅ 여기 리스트에 학과/동아리/교육과정 정적 페이지들을 계속 추가
         self.department_static_urls = [
-            # # 에디슨칼리지 첨단산업융합학부
-            # {
-            #     "url": "https://edison.kumoh.ac.kr/edison/sub0101.do",
-            #     "name": "에디슨칼리지 첨단산업융합학부 소개",
-            # },
-            # {
-            #     "url": "https://edison.kumoh.ac.kr/edison/sub0102.do",
-            #     "name": "에디슨칼리지 첨단산업융합학부 교육목표",
-            # },
-            # {
-            #     "url": "https://edison.kumoh.ac.kr/edison/sub0104.do",
-            #     "name": "에디슨칼리지 첨단산업융합학부 비전",
-            # },
+            # 에디슨칼리지 첨단산업융합학부
+            {
+                "url": "https://edison.kumoh.ac.kr/edison/sub0101.do",
+                "name": "에디슨칼리지 첨단산업융합학부 소개",
+            },
+            {
+                "url": "https://edison.kumoh.ac.kr/edison/sub0102.do",
+                "name": "에디슨칼리지 첨단산업융합학부 교육목표",
+            },
+            {
+                "url": "https://edison.kumoh.ac.kr/edison/sub0104.do",
+                "name": "에디슨칼리지 첨단산업융합학부 비전",
+            },
 
-            # # 건축토목환경공학부
-            # {
-            #     "url": "https://archi.kumoh.ac.kr/archi/sub0102.do",
-            #     "name": "건축토목환경공학부 소개",
-            # },
-            # {
-            #     "url": "https://archi.kumoh.ac.kr/archi/sub0103.do",
-            #     "name": "건축토목환경공학부 건축학전공 소개",
-            # },
-            # {
-            #     "url": "https://archi.kumoh.ac.kr/archi/sub0104.do",
-            #     "name": "건축토목환경공학부 건축공학전공 소개",
-            # },
-            # {
-            #     "url": "https://civil.kumoh.ac.kr/civil/sub0101.do",
-            #     "name": "건축토목환경공학부 토목공학전공 소개",
-            # },
-            # {
-            #     "url": "https://env.kumoh.ac.kr/env/sub0101.do",
-            #     "name": "건축토목환경공학부 환경공학전공 소개",
-            # },
+            # 건축토목환경공학부
+            {
+                "url": "https://archi.kumoh.ac.kr/archi/sub0102.do",
+                "name": "건축토목환경공학부 소개",
+            },
+            {
+                "url": "https://archi.kumoh.ac.kr/archi/sub0103.do",
+                "name": "건축토목환경공학부 건축학전공 소개",
+            },
+            {
+                "url": "https://archi.kumoh.ac.kr/archi/sub0104.do",
+                "name": "건축토목환경공학부 건축공학전공 소개",
+            },
+            {
+                "url": "https://civil.kumoh.ac.kr/civil/sub0101.do",
+                "name": "건축토목환경공학부 토목공학전공 소개",
+            },
+            {
+                "url": "https://env.kumoh.ac.kr/env/sub0101.do",
+                "name": "건축토목환경공학부 환경공학전공 소개",
+            },
             {
                 "url": "https://env.kumoh.ac.kr/env/sub0202_01.do",
                 "name": "건축토목환경공학부 환경공학전공 동아리 지구환경연구회 소개",
@@ -128,246 +128,246 @@ class departmentCrawler:
                 "name": "건축토목환경공학부 환경공학전공 동아리 BOD 소개",
             },
 
-            # # 기계공학부
-            # {
-            #     "url": "https://mecheng.kumoh.ac.kr/mecheng/sub0101.do",
-            #     "name": "기계공학부 기계공학전공 소개",
-            # },
-            # {
-            #     "url": "https://mx.kumoh.ac.kr/md/sub0101.do",
-            #     "name": "기계공학부 기계시스템공학전공 소개",
-            # },
-            # {
-            #     "url": "https://mobility.kumoh.ac.kr/smartmobility/sub0101.do",
-            #     "name": "기계공학부 스마트모빌리티전공 인사말",
-            # },
-            # {
-            #     "url": "https://mobility.kumoh.ac.kr/smartmobility/sub0102.do",
-            #     "name": "기계공학부 스마트모빌리티전공 교육 목표",
-            # },
-            # {
-            #     "url": "https://mobility.kumoh.ac.kr/smartmobility/sub0301.do",
-            #     "name": "기계공학부 스마트모빌리티전공 공동학과 교육 과정",
-            # },
-            # {
-            #     "url": "https://mobility.kumoh.ac.kr/smartmobility/sub0304.do",
-            #     "name": "기계공학부 스마트모빌리티전공 이수체계도",
-            # },
+            # 기계공학부
+            {
+                "url": "https://mecheng.kumoh.ac.kr/mecheng/sub0101.do",
+                "name": "기계공학부 기계공학전공 소개",
+            },
+            {
+                "url": "https://mx.kumoh.ac.kr/md/sub0101.do",
+                "name": "기계공학부 기계시스템공학전공 소개",
+            },
+            {
+                "url": "https://mobility.kumoh.ac.kr/smartmobility/sub0101.do",
+                "name": "기계공학부 스마트모빌리티전공 인사말",
+            },
+            {
+                "url": "https://mobility.kumoh.ac.kr/smartmobility/sub0102.do",
+                "name": "기계공학부 스마트모빌리티전공 교육 목표",
+            },
+            {
+                "url": "https://mobility.kumoh.ac.kr/smartmobility/sub0301.do",
+                "name": "기계공학부 스마트모빌리티전공 공동학과 교육 과정",
+            },
+            {
+                "url": "https://mobility.kumoh.ac.kr/smartmobility/sub0304.do",
+                "name": "기계공학부 스마트모빌리티전공 이수체계도",
+            },
 
-            # # 산업빅데이터공학부
-            # {
-            #     "url": "https://ie.kumoh.ac.kr/ie/sub0102.do",
-            #     "name": "산업빅데이터공학부 산업공학전공 소개",
-            # },
-            # {
-            #     "url": "https://ie.kumoh.ac.kr/ie/sub0603.do",
-            #     "name": "산업빅데이터공학부 산업공학전공 동아리/학생회",
-            # },
-            # {
-            #     "url": "https://www.kumoh.ac.kr/bigdata/sub0102.do",
-            #     "name": "산업빅데이터공학부 수리빅데이터전공 개요 및 연혁",
-            # },
-            # {
-            #     "url": "https://www.kumoh.ac.kr/bigdata/sub0502.do",
-            #     "name": "산업빅데이터공학부 수리빅데이터전공 전공동아리",
-            # },
+            # 산업빅데이터공학부
+            {
+                "url": "https://ie.kumoh.ac.kr/ie/sub0102.do",
+                "name": "산업빅데이터공학부 산업공학전공 소개",
+            },
+            {
+                "url": "https://ie.kumoh.ac.kr/ie/sub0603.do",
+                "name": "산업빅데이터공학부 산업공학전공 동아리/학생회",
+            },
+            {
+                "url": "https://www.kumoh.ac.kr/bigdata/sub0102.do",
+                "name": "산업빅데이터공학부 수리빅데이터전공 개요 및 연혁",
+            },
+            {
+                "url": "https://www.kumoh.ac.kr/bigdata/sub0502.do",
+                "name": "산업빅데이터공학부 수리빅데이터전공 전공동아리",
+            },
 
-            # # 재료공학부
-            # {
-            #     "url": "https://polymer.kumoh.ac.kr/polymer/sub0202.do",
-            #     "name": "재료공학부 고분자공학전공 전공소개",
-            # },
-            # {
-            #     "url": "https://polymer.kumoh.ac.kr/polymer/sub0502.do",
-            #     "name": "재료공학부 고분자공학전공 동아리",
-            # },
-            # {
-            #     "url": "https://mse.kumoh.ac.kr/mse/sub0102.do",
-            #     "name": "재료공학부 신소재공학전공 전공소개",
-            # },
-            # {
-            #     "url": "https://mse.kumoh.ac.kr/mse/sub020102.do",
-            #     "name": "재료공학부 신소재공학전공 교육과정 편성표",
-            # },
-            # {
-            #     "url": "https://mse.kumoh.ac.kr/mse/sub0602.do",
-            #     "name": "재료공학부 신소재공학전공 동아리",
-            # },
+            # 재료공학부
+            {
+                "url": "https://polymer.kumoh.ac.kr/polymer/sub0202.do",
+                "name": "재료공학부 고분자공학전공 전공소개",
+            },
+            {
+                "url": "https://polymer.kumoh.ac.kr/polymer/sub0502.do",
+                "name": "재료공학부 고분자공학전공 동아리",
+            },
+            {
+                "url": "https://mse.kumoh.ac.kr/mse/sub0102.do",
+                "name": "재료공학부 신소재공학전공 전공소개",
+            },
+            {
+                "url": "https://mse.kumoh.ac.kr/mse/sub020102.do",
+                "name": "재료공학부 신소재공학전공 교육과정 편성표",
+            },
+            {
+                "url": "https://mse.kumoh.ac.kr/mse/sub0602.do",
+                "name": "재료공학부 신소재공학전공 동아리",
+            },
 
-            # # 전자공학부
-            # {
-            #     "url": "https://see.kumoh.ac.kr/see/sub0101.do",
-            #     "name": "전자공학부 반도체시스템전공 전자시스템전공 소개",
-            # },
-            # {
-            #     "url": "https://see.kumoh.ac.kr/see/sub0501.do",
-            #     "name": "전자공학부 반도체시스템전공 전자시스템전공 동아리",
-            # },
+            # 전자공학부
+            {
+                "url": "https://see.kumoh.ac.kr/see/sub0101.do",
+                "name": "전자공학부 반도체시스템전공 전자시스템전공 소개",
+            },
+            {
+                "url": "https://see.kumoh.ac.kr/see/sub0501.do",
+                "name": "전자공학부 반도체시스템전공 전자시스템전공 동아리",
+            },
 
-            # # 컴퓨터공학부 - 소프트웨어전공
-            # {
-            #     "url": "https://cs.kumoh.ac.kr/cs/sub0101.do",
-            #     "name": "컴퓨터공학부 소프트웨어전공 소개",
-            # },
-            # {
-            #     "url": "https://cs.kumoh.ac.kr/cs/sub0105_2.do",
-            #     "name": "컴퓨터공학부 소프트웨어전공 교육과정",
-            # },
-            # {
-            #     "url": "https://cs.kumoh.ac.kr/cs/sub0504.do",
-            #     "name": "컴퓨터공학부 소프트웨어전공 동아리",
-            # },
+            # 컴퓨터공학부 - 소프트웨어전공
+            {
+                "url": "https://cs.kumoh.ac.kr/cs/sub0101.do",
+                "name": "컴퓨터공학부 소프트웨어전공 소개",
+            },
+            {
+                "url": "https://cs.kumoh.ac.kr/cs/sub0105_2.do",
+                "name": "컴퓨터공학부 소프트웨어전공 교육과정",
+            },
+            {
+                "url": "https://cs.kumoh.ac.kr/cs/sub0504.do",
+                "name": "컴퓨터공학부 소프트웨어전공 동아리",
+            },
 
-            # # 컴퓨터공학부 - 인공지능공학전공
-            # {
-            #     "url": "https://ai.kumoh.ac.kr/ai/sub0102.do",
-            #     "name": "컴퓨터공학부 인공지능공학전공 개요 및 연혁",
-            # },
-            # {
-            #     "url": "https://ai.kumoh.ac.kr/ai/sub0302.do",
-            #     "name": "컴퓨터공학부 인공지능공학전공 교육과정표",
-            # },
-            # {
-            #     "url": "https://ai.kumoh.ac.kr/ai/sub0602.do",
-            #     "name": "컴퓨터공학부 인공지능공학전공 전공동아리",
-            # },
+            # 컴퓨터공학부 - 인공지능공학전공
+            {
+                "url": "https://ai.kumoh.ac.kr/ai/sub0102.do",
+                "name": "컴퓨터공학부 인공지능공학전공 개요 및 연혁",
+            },
+            {
+                "url": "https://ai.kumoh.ac.kr/ai/sub0302.do",
+                "name": "컴퓨터공학부 인공지능공학전공 교육과정표",
+            },
+            {
+                "url": "https://ai.kumoh.ac.kr/ai/sub0602.do",
+                "name": "컴퓨터공학부 인공지능공학전공 전공동아리",
+            },
 
-            # # 컴퓨터공학부 - 컴퓨터공학전공
-            # {
-            #     "url": "https://ce.kumoh.ac.kr/ce/sub0102.do",
-            #     "name": "컴퓨터공학부 컴퓨터공학전공 개요 및 연혁",
-            # },
-            # {
-            #     "url": "https://ce.kumoh.ac.kr/ce/sub0205.do",
-            #     "name": "컴퓨터공학부 컴퓨터공학전공 동아리",
-            # },
-            # {
-            #     "url": "https://ce.kumoh.ac.kr/ce/sub0301.do",
-            #     "name": "컴퓨터공학부 컴퓨터공학전공 교과과정",
-            # },
+            # 컴퓨터공학부 - 컴퓨터공학전공
+            {
+                "url": "https://ce.kumoh.ac.kr/ce/sub0102.do",
+                "name": "컴퓨터공학부 컴퓨터공학전공 개요 및 연혁",
+            },
+            {
+                "url": "https://ce.kumoh.ac.kr/ce/sub0205.do",
+                "name": "컴퓨터공학부 컴퓨터공학전공 동아리",
+            },
+            {
+                "url": "https://ce.kumoh.ac.kr/ce/sub0301.do",
+                "name": "컴퓨터공학부 컴퓨터공학전공 교과과정",
+            },
 
-            # # 화학소재공학부 - 소재디자인공학전공
-            # {
-            #     "url": "https://textile.kumoh.ac.kr/textile/sub0101.do",
-            #     "name": "화학소재공학부 소재디자인공학전공 전공장 인사말",
-            # },
-            # {
-            #     "url": "https://textile.kumoh.ac.kr/textile/sub0203.do",
-            #     "name": "화학소재공학부 소재디자인공학전공 교육과정",
-            # },
-            # {
-            #     "url": "https://textile.kumoh.ac.kr/textile/sub0501.do",
-            #     "name": "화학소재공학부 소재디자인공학전공 전공동아리",
-            # },
+            # 화학소재공학부 - 소재디자인공학전공
+            {
+                "url": "https://textile.kumoh.ac.kr/textile/sub0101.do",
+                "name": "화학소재공학부 소재디자인공학전공 전공장 인사말",
+            },
+            {
+                "url": "https://textile.kumoh.ac.kr/textile/sub0203.do",
+                "name": "화학소재공학부 소재디자인공학전공 교육과정",
+            },
+            {
+                "url": "https://textile.kumoh.ac.kr/textile/sub0501.do",
+                "name": "화학소재공학부 소재디자인공학전공 전공동아리",
+            },
 
-            # # 화학소재공학부 - 화학공학전공
-            # {
-            #     "url": "https://che.kumoh.ac.kr/che/sub0102.do",
-            #     "name": "화학소재공학부 화학공학전공 학과소개",
-            # },
-            # {
-            #     "url": "https://che.kumoh.ac.kr/che/sub0502.do",
-            #     "name": "화학소재공학부 화학공학전공 동아리",
-            # },
+            # 화학소재공학부 - 화학공학전공
+            {
+                "url": "https://che.kumoh.ac.kr/che/sub0102.do",
+                "name": "화학소재공학부 화학공학전공 학과소개",
+            },
+            {
+                "url": "https://che.kumoh.ac.kr/che/sub0502.do",
+                "name": "화학소재공학부 화학공학전공 동아리",
+            },
 
-            # # 화학소재공학부 - 화학생명소재전공
-            # {
-            #     "url": "https://chembio.kumoh.ac.kr/chembio/sub0102.do",
-            #     "name": "화학소재공학부 화학생명소재전공 전공개요",
-            # },
+            # 화학소재공학부 - 화학생명소재전공
+            {
+                "url": "https://chembio.kumoh.ac.kr/chembio/sub0102.do",
+                "name": "화학소재공학부 화학생명소재전공 전공개요",
+            },
 
-            # # 광시스템공학과
-            # {
-            #     "url": "https://optics.kumoh.ac.kr/optics/sub0101.do",
-            #     "name": "광시스템공학과 학과소개",
-            # },
+            # 광시스템공학과
+            {
+                "url": "https://optics.kumoh.ac.kr/optics/sub0101.do",
+                "name": "광시스템공학과 학과소개",
+            },
 
-            # # 바이오메디컬공학과
-            # {
-            #     "url": "https://medicalit.kumoh.ac.kr/medicalit/sub0101.do",
-            #     "name": "바이오메디컬공학과 학과소개",
-            # },
-            # {
-            #     "url": "https://medicalit.kumoh.ac.kr/medicalit/sub020102.do",
-            #     "name": "바이오메디컬공학과 교과소개",
-            # },
+            # 바이오메디컬공학과
+            {
+                "url": "https://medicalit.kumoh.ac.kr/medicalit/sub0101.do",
+                "name": "바이오메디컬공학과 학과소개",
+            },
+            {
+                "url": "https://medicalit.kumoh.ac.kr/medicalit/sub020102.do",
+                "name": "바이오메디컬공학과 교과소개",
+            },
 
-            # # IT융합학과
-            # {
-            #     "url": "https://itc.kumoh.ac.kr/itc/sub0101.do",
-            #     "name": "IT융합학과 학과소개",
-            # },
-            # {
-            #     "url": "https://itc.kumoh.ac.kr/itc/sub0103.do#accordion-menu-title",
-            #     "name": "IT융합학과 교과목개요",
-            # },
+            # IT융합학과
+            {
+                "url": "https://itc.kumoh.ac.kr/itc/sub0101.do",
+                "name": "IT융합학과 학과소개",
+            },
+            {
+                "url": "https://itc.kumoh.ac.kr/itc/sub0103.do#accordion-menu-title",
+                "name": "IT융합학과 교과목개요",
+            },
 
-            # # 자율전공학부
-            # {
-            #     "url": "https://sls.kumoh.ac.kr/sls/sub0101.do",
-            #     "name": "자율전공학부 소개",
-            # },
-            # {
-            #     "url": "https://sls.kumoh.ac.kr/sls/sub0301.do",
-            #     "name": "자율전공학부 교과과정",
-            # },
-            # {
-            #     "url": "https://sls.kumoh.ac.kr/sls/sub0302.do",
-            #     "name": "자율전공학부 전공선택",
-            # },
+            # 자율전공학부
+            {
+                "url": "https://sls.kumoh.ac.kr/sls/sub0101.do",
+                "name": "자율전공학부 소개",
+            },
+            {
+                "url": "https://sls.kumoh.ac.kr/sls/sub0301.do",
+                "name": "자율전공학부 교과과정",
+            },
+            {
+                "url": "https://sls.kumoh.ac.kr/sls/sub0302.do",
+                "name": "자율전공학부 전공선택",
+            },
 
-            # # 경영학과
-            # {
-            #     "url": "https://biz.kumoh.ac.kr/biz/sub0102.do",
-            #     "name": "경영학과 소개",
-            # },
-            # {
-            #     "url": "https://biz.kumoh.ac.kr/biz/sub0702.do",
-            #     "name": "경영학과 동아리",
-            # },
+            # 경영학과
+            {
+                "url": "https://biz.kumoh.ac.kr/biz/sub0102.do",
+                "name": "경영학과 소개",
+            },
+            {
+                "url": "https://biz.kumoh.ac.kr/biz/sub0702.do",
+                "name": "경영학과 동아리",
+            },
         ]
 
         self.department_board_urls = [
-            # {
-            #     "url": "https://archi.kumoh.ac.kr/archi/sub0201.do",
-            #     "name": "건축토목환경공학부 건축학전공 교육과정"
-            # },
-            # {
-            #     "url": "https://archi.kumoh.ac.kr/archi/sub0202.do",
-            #     "name": "건축토목환경공학부 건축공학전공 교육과정"
-            # },
-            # {
-            #     "url": "https://civil.kumoh.ac.kr/civil/sub030101.do",
-            #     "name": "건축토목환경공학부 토목공학전공 교육과정"
-            # },
-            # {
-            #     "url": "https://ie.kumoh.ac.kr/ie/sub030101.do",
-            #     "name": "산업빅데이터공학부 산업공학전공 교육과정"
-            # },
-            # {
-            #     "url": "https://www.kumoh.ac.kr/bigdata/sub030102.do",
-            #     "name": "산업빅데이터공학부 수리빅데이터전공 교육과정표"
-            # },
-            # {
-            #     "url": "https://polymer.kumoh.ac.kr/polymer/sub0404.do",
-            #     "name": "재료공학부 고분자공학전공 교과과정"
-            # },
-            # {
-            #     "url": "https://che.kumoh.ac.kr/che/sub0304.do",
-            #     "name": "화학소재공학부 화학공학전공 교과과정"
-            # },
-            # {
-            #     "url": "https://chembio.kumoh.ac.kr/chembio/sub030101.do",
-            #     "name": "화학소재공학부 화학생명소재전공 교육과정 및 교과목 개요",
-            # },
-            # {
-            #     "url": "https://optics.kumoh.ac.kr/optics/sub020102.do",
-            #     "name": "광시스템공학과 학부교육과정"
-            # },
-            # {
-            #     "url": "https://biz.kumoh.ac.kr/biz/sub030101.do",
-            #     "name": "경영학과 교과과정"
-            # },
+            {
+                "url": "https://archi.kumoh.ac.kr/archi/sub0201.do",
+                "name": "건축토목환경공학부 건축학전공 교육과정"
+            },
+            {
+                "url": "https://archi.kumoh.ac.kr/archi/sub0202.do",
+                "name": "건축토목환경공학부 건축공학전공 교육과정"
+            },
+            {
+                "url": "https://civil.kumoh.ac.kr/civil/sub030101.do",
+                "name": "건축토목환경공학부 토목공학전공 교육과정"
+            },
+            {
+                "url": "https://ie.kumoh.ac.kr/ie/sub030101.do",
+                "name": "산업빅데이터공학부 산업공학전공 교육과정"
+            },
+            {
+                "url": "https://www.kumoh.ac.kr/bigdata/sub030102.do",
+                "name": "산업빅데이터공학부 수리빅데이터전공 교육과정표"
+            },
+            {
+                "url": "https://polymer.kumoh.ac.kr/polymer/sub0404.do",
+                "name": "재료공학부 고분자공학전공 교과과정"
+            },
+            {
+                "url": "https://che.kumoh.ac.kr/che/sub0304.do",
+                "name": "화학소재공학부 화학공학전공 교과과정"
+            },
+            {
+                "url": "https://chembio.kumoh.ac.kr/chembio/sub030101.do",
+                "name": "화학소재공학부 화학생명소재전공 교육과정 및 교과목 개요",
+            },
+            {
+                "url": "https://optics.kumoh.ac.kr/optics/sub020102.do",
+                "name": "광시스템공학과 학부교육과정"
+            },
+            {
+                "url": "https://biz.kumoh.ac.kr/biz/sub030101.do",
+                "name": "경영학과 교과과정"
+            },
         ]
 
         # 필터 및 저장소 초기화
